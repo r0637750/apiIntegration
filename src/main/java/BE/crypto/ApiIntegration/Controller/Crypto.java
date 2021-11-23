@@ -1,7 +1,13 @@
 package BE.crypto.ApiIntegration.Controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -47,7 +53,7 @@ public class Crypto {
         return result;
     }
 
-    // API  BALJIT -----------------------------------------------------------------------------------------------------
+    /** API  BALJIT----------------------------------------------------------------------------------------------------- */
 
     @GetMapping("/favorite-list/coins/all")
     public String getAllCoinsOverview() {
@@ -116,13 +122,44 @@ public class Crypto {
     public Object removeCoinFromFavoriteCoinList(@PathVariable long coinId, @PathVariable long listId) {
         try {
             String url = this.favoriteListApiBaljit + "remove-coin/" + coinId + "/" + listId;
-
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.delete(url);
         } catch (Exception e) {
             return e.getMessage();
         }
         return "Success";
+    }
+
+    @GetMapping("kraken/assets")
+    public Object getPublicAssets() throws JsonProcessingException {
+        String url = "https://api.kraken.com/0/public/Assets";
+
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+
+        Map<String, String> resultMap = jsonToHashMap(result);
+        if (resultMap.get("error") == null){
+            return resultMap.get("error");
+        }
+
+        Object resultSet = resultMap.get("result");
+        return resultSet;
+    }
+
+    /** Existing KRAKEN API */
+    @GetMapping("kraken/status")
+    public Object getStatusKrakenApi() throws JsonProcessingException {
+        String url = "https://api.kraken.com/0/public/SystemStatus";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+
+        Map<String, String> resultMap = jsonToHashMap(result);
+        if (resultMap.get("error") == null){
+            return resultMap.get("error");
+        }
+
+        Object resultSet = resultMap.get("result");
+        return resultSet;
     }
 
     // API  ARTHUR -----------------------------------------------------------------------------------------------------
@@ -160,6 +197,12 @@ public class Crypto {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(url, String.class);
 
+    }
+
+    /** Helper methods*/
+    private Map<String, String> jsonToHashMap(String json) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.readValue(json, Map.class);
     }
 
 }
