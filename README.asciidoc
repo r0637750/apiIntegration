@@ -59,5 +59,9 @@ POST $ /user/update/{id} $ update an already existing user in the list $  ```{ "
 
 DELETE $ /user/delete/{id} $ Remove user from the list $ /
 
+GET $ /nomics/ticker/{apiKey} $ Price, volume, market cap, and rank for all currencies across 1 hour, 1 day, 7 day, 30 day, 365 day, and year to date intervals. Current prices are updated every 10 seconds. $ /
+
+GET $ /nomics/concurencies/{apiKey} $ The currencies endpoint returns all the currencies and their metadata that Nomics supports. $ /
+
 
 |===
