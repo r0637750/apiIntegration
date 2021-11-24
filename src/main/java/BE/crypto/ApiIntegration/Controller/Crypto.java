@@ -203,6 +203,23 @@ public class Crypto {
 
     }
 
+    @GetMapping("/nomics/ticker/{apiKey}")
+    public String nomicsTicker(@PathVariable String apiKey) {
+        String url = "https://api.nomics.com/v1/currencies/ticker?key=" + apiKey + "&ids=BTC,ETH,XRP&interval=1d,30d&convert=EUR&per-page=100&page=1";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, String.class);
+
+    }
+
+    @GetMapping("/nomics/concurencies/{apiKey}")
+    public String nomicsConcurencies(@PathVariable String apiKey) {
+        String url = "https://api.nomics.com/v1/currencies?key=" + apiKey + "&ids=BTC,ETH,XRP&attributes=id,name,logo_url";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, String.class);
+
+    }
+
+
 
     // WALLET API MILAN -----------------------------------------------------------------------------------------------------
     @GetMapping("/wallet/test")
