@@ -78,5 +78,16 @@ POST $ /favorite-list-nft/add-nft $ Add nft to favorite list $  ```{ "nft_id": 1
 
 DELETE $ /favorite-list-nft/remove-nft/{nftId}/{listId} $ Remove nft from Favorite list $ /
 
+// API JOACHIM -----------------------------------------------------------
+
+GET $ /nft/all $ Overview all nft's $ /
+
+GET $ /nft/{id} $ Get specific nft $ /
+
+POST $ /add/ $ Add new nft $ /
+
+POST $ /update/{id} $ Update specific nft $ /
+
+DELETE $ /nft/delete/{nftId} $ Remove nft $ /
 
 |===
