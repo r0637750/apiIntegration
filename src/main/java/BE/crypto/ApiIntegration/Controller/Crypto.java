@@ -228,7 +228,7 @@ public class Crypto {
         restTemplate.delete(url);
     }
 
-    @PostMapping("/coin/update/{id}")
+    @PostMapping("/nft/update/{id}")
     public void updateNft(@PathVariable int id, @RequestBody Object nft){
         String url = nftApiJoachim + "update/" + id;
         RestTemplate restTemplate = new RestTemplate();
