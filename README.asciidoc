@@ -1,0 +1,52 @@
+:toc: left
+:sectnums:
+:icons: font
+:source-highlighter: highlightjs
+
+:source-highlighter: rouge
+:rouge-style: thankful_eyes
+
+= Crypto REST API
+
+== Documentation
+
+=== Base URL
+
+link:http://localhost:8080/api[]
+
+Example:
+link:http://localhost:8080/api/status[^]
+
+=== URL'S
+
+[format=dsv, separator=$]
+|===
+*Request* $ *Path* $ *Description* $ *BODY*
+// TEMPLATE
+// Request $ Path $ Description $ BODY 
+
+// API BALJIT -------------------------------------------------------------
+GET $ /status $ Check status api $ /
+
+GET $ /favorite-list/coins/all $ Overview all coins $ /
+
+POST $ /favorite-list/coins/new $ Add coin to lost $ ```{ "name": "BITCOIN", "alias_currency": "BTC_EUR" } ```
+
+GET $ /favorite-list/all $ Overview all favorite lists $ /
+
+GET $ /favorite-list/coins/{id} $ Overview coins inside Favorite List $ /
+
+POST $ /favorite-list/new/{name} $ Add new Favorite list $ /
+
+POST $ /favorite-list/add-coin $ Add coin to favorite list $  ```{ "coin_id": 1, "fav_list_id": 2 }```
+
+DELETE $ /favorite-list/remove-coin/{coinId}/{listId} $ Remove coin from Favorite list $ /
+
+GET $ /kraken/status $ Status Kraken api $ /
+
+GET $ /kraken/assets $ Assets Crypto Kraken $ /
+
+// API ?-------------------------------------------------------------
+
+
+|===

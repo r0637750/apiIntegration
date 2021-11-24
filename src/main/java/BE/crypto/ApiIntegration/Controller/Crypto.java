@@ -131,7 +131,8 @@ public class Crypto {
         return "Success";
     }
 
-    @GetMapping("kraken/assets")
+    /** Existing KRAKEN API */
+    @GetMapping("/kraken/assets")
     public Object getPublicAssets() throws JsonProcessingException {
         String url = "https://api.kraken.com/0/public/Assets";
 
@@ -147,8 +148,7 @@ public class Crypto {
         return resultSet;
     }
 
-    /** Existing KRAKEN API */
-    @GetMapping("kraken/status")
+    @GetMapping("/kraken/status")
     public Object getStatusKrakenApi() throws JsonProcessingException {
         String url = "https://api.kraken.com/0/public/SystemStatus";
         RestTemplate restTemplate = new RestTemplate();
