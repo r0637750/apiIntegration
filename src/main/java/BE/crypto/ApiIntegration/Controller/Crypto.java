@@ -16,6 +16,8 @@ public class Crypto {
     private final String coinsApiFrederik = "http://localhost:8081/coins/";
     private final String favoriteListApiBaljit = "http://localhost:8082/favorite-list/";
     private final String coinsApiArthur = "http://localhost:8083/api/authentication/";
+    private final String walletApiMilan = "http://localhost:8084/wallet/";
+    private final String verkenningApiMilan = "https://api.coindesk.com/v1/bpi/currentprice.json";
     private final String nftApiJoachim = "http://localhost:8084/nft";
 
     // API status
@@ -198,6 +200,58 @@ public class Crypto {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(url, String.class);
 
+    }
+
+
+    // WALLET API MILAN -----------------------------------------------------------------------------------------------------
+    @GetMapping("/wallet/test")
+    public String test() {
+        String url = walletApiMilan + "test";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    @GetMapping("/wallet/all")
+    public String getAllWallets() {
+        String url = walletApiMilan + "all";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    @GetMapping("/wallet/get/{id}")
+    public String getWalletById(@PathVariable("id") Long id){
+        String url = walletApiMilan + "all";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    @PostMapping("/wallet/add")
+    public String addWallet (@RequestBody Object wallet){
+        String url = walletApiMilan + "add";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForObject(url, wallet, String.class);
+    }
+    @PostMapping("/wallet/update/{id}")
+    public String updateWallet(@PathVariable("id") Long id,@RequestBody Object wallet){
+        String url = walletApiMilan + "update/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.postForObject(url, wallet, String.class);
+    }
+
+    @DeleteMapping("/wallet/delete/{id}")
+    public void deleteWallet(@PathVariable("id") Long id){
+        String url = walletApiMilan + "delete/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(url, String.class);
+    }
+
+    // VERKENNING API MILAN -----------------------------------------------------------------------------------------------------
+
+    @GetMapping("bitcoin_per_minute")
+    public String getInfoBitcoinPerMinute(){
+        String url = verkenningApiMilan;
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url,String.class);
     }
 
     /** Helper methods*/
