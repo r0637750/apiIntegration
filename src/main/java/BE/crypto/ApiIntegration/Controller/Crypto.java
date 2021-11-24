@@ -16,7 +16,7 @@ public class Crypto {
     private final String coinsApiFrederik = "http://localhost:8081/coins/";
     private final String favoriteListApiBaljit = "http://localhost:8082/favorite-list/";
     private final String coinsApiArthur = "http://localhost:8083/api/authentication/";
-    private final String nftApiJoachim = "http://localhost:8084/nft";
+    private final String nftApiJoachim = "http://localhost:8084/nft/";
 
     // API status
     @GetMapping("/status")
