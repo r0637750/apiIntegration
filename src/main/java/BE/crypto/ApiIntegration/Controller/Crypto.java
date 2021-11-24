@@ -18,7 +18,7 @@ public class Crypto {
     private final String coinsApiArthur = "http://localhost:8083/api/authentication/";
     private final String walletApiMilan = "http://localhost:8084/wallet/";
     private final String verkenningApiMilan = "https://api.coindesk.com/v1/bpi/currentprice.json";
-    private final String nftApiJoachim = "http://localhost:8084/nft";
+    private final String nftApiJoachim = "http://localhost:8084/nft/";
 
     // API status
     @GetMapping("/status")
@@ -282,7 +282,7 @@ public class Crypto {
         restTemplate.delete(url);
     }
 
-    @PostMapping("/coin/update/{id}")
+    @PostMapping("/nft/update/{id}")
     public void updateNft(@PathVariable int id, @RequestBody Object nft){
         String url = nftApiJoachim + "update/" + id;
         RestTemplate restTemplate = new RestTemplate();
