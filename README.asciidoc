@@ -46,7 +46,18 @@ GET $ /kraken/status $ Status Kraken api $ /
 
 GET $ /kraken/assets $ Assets Crypto Kraken $ /
 
-// API ?-------------------------------------------------------------
+// API ARTHUR-------------------------------------------------------------
+
+
+GET $ /user/all $ Overview of all users $ /
+
+GET $ /user/findByName/{name} $ Overview of user with given name $ /
+
+POST $ /user/add $ Add new user to list $ ```{ "name": "name", "password": "pswd", "role":"User" }``` 
+
+POST $ /user/update/{id} $ update an already existing user in the list $  ```{ "name": "name", "password": "pswd", "role":"User" }``` 
+
+DELETE $ /user/delete/{id} $ Remove user from the list $ /
 
 
 |===
