@@ -16,6 +16,7 @@ public class Crypto {
     private final String coinsApiFrederik = "http://localhost:8081/coins/";
     private final String favoriteListApiBaljit = "http://localhost:8082/favorite-list/";
     private final String coinsApiArthur = "http://localhost:8083/api/authentication/";
+    private final String nftApiJoachim = "http://localhost:8084/nft";
 
     // API status
     @GetMapping("/status")
@@ -203,6 +204,35 @@ public class Crypto {
     private Map<String, String> jsonToHashMap(String json) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(json, Map.class);
+    }
+
+    // API JOACHIM -----------------------------------------------------------------------------------------------------
+    @GetMapping("/nft/all")
+    public String allNfts(){
+        String url = nftApiJoachim + "all";
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    @PostMapping("/nft/add")
+    public void addNft(@RequestBody Object nft){
+        String url = nftApiJoachim + "add";
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject(url, nft, String.class);
+    }
+
+    @DeleteMapping("/nft/delete/{id}")
+    public void deleteNft(@PathVariable int id){
+        String url = nftApiJoachim + "delete/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(url);
+    }
+
+    @PostMapping("/coin/update/{id}")
+    public void updateNft(@PathVariable int id, @RequestBody Object nft){
+        String url = nftApiJoachim + "update/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject(url, nft, String.class);
     }
 
 }
