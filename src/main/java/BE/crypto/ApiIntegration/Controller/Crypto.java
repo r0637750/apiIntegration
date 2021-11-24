@@ -19,6 +19,7 @@ public class Crypto {
     private final String walletApiMilan = "http://localhost:8084/wallet/";
     private final String verkenningApiMilan = "https://api.coindesk.com/v1/bpi/currentprice.json";
     private final String nftApiJoachim = "http://localhost:8084/nft/";
+    private final String favoriteListNftApiJoram = "http://localhost:8082/favorite-list-nft/";
 
     // API status
     @GetMapping("/status")
@@ -305,6 +306,83 @@ public class Crypto {
         String url = nftApiJoachim + "update/" + id;
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(url, nft, String.class);
+    }
+
+    // API JORAM -----------------------------------------------------------------------------------------------------
+
+    @GetMapping("/favorite-list-nft/nft/all")
+    public String getAllNftOverview() {
+        String url = this.favoriteListNftApiJoram + "nft/overview";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+        return result;
+    }
+
+    @PostMapping("/favorite-list-nft/nft/new")
+    public Object createNewFavoriteNftList(@RequestBody Map<String, String> payload) {
+        String url = this.favoriteListNftApiJoram + "nft/new";
+        Object res = null;
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            res = restTemplate.postForObject(url, payload, String.class);
+        } catch (Exception e) {
+            res = e.getMessage();
+        }
+        return res;
+    }
+
+    @GetMapping("/favorite-list-nft/all")
+    public String getAllFavoriteNftLists() {
+        String url = this.favoriteListNftApiJoram + "overview";
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+        return result;
+    }
+
+    @GetMapping("/favorite-list-nft/nft/{id}")
+    public String getAllFavoriteNtfListsById(@PathVariable int id) {
+        String url = this.favoriteListNftApiJoram + "overview/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        String result = restTemplate.getForObject(url, String.class);
+        return result;
+    }
+
+    @PostMapping("/favorite-list-nft/new/{name}")
+    public Object createNewFavoriteNftList(@PathVariable Object name) {
+        String url = this.favoriteListNftApiJoram + "new/" + name;
+        Object res = null;
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            res = restTemplate.postForObject(url, name, String.class);
+        } catch (Exception e) {
+            res = e.getMessage();
+        }
+        return res;
+    }
+
+    @PostMapping("/favorite-list-nft/add-nft")
+    public Object addNftFavoriteNftList(@RequestBody Object payload) {
+        Object res = null;
+        try {
+            String url = this.favoriteListNftApiJoram + "add-nft/";
+            RestTemplate restTemplate = new RestTemplate();
+            res = restTemplate.postForObject(url, payload, String.class);
+        } catch (Exception e) {
+            res = e.getMessage();
+        }
+        return res;
+    }
+
+    @DeleteMapping("/favorite-list-nft/remove-nft/{nftId}/{listId}")
+    public Object removeNftFromFavoriteNftList(@PathVariable long nftId, @PathVariable long listId) {
+        try {
+            String url = this.favoriteListNftApiJoram + "remove-nft/" + nftId + "/" + listId;
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.delete(url);
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "Success";
     }
 
 }

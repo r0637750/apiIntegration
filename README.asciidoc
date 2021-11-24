@@ -64,4 +64,19 @@ GET $ /nomics/ticker/{apiKey} $ Price, volume, market cap, and rank for all curr
 GET $ /nomics/concurencies/{apiKey} $ The currencies endpoint returns all the currencies and their metadata that Nomics supports. $ /
 
 
+// API JORAM -------------------------------------------------------------
+
+GET $ /favorite-list-nft/nft/all $ Overview all nft's $ /
+
+GET $ /favorite-list-nft/all $ Overview all favorite nft lists $ /
+
+GET $ /favorite-list-nft/nft/{id} $ Overview nft's inside Favorite List $ /
+
+POST $ /favorite-list-nft/new/{name} $ Add new Favorite nft list $ /
+
+POST $ /favorite-list-nft/add-nft $ Add nft to favorite list $  ```{ "nft_id": 1, "fav_nft_list_id": 2 }```
+
+DELETE $ /favorite-list-nft/remove-nft/{nftId}/{listId} $ Remove nft from Favorite list $ /
+
+
 |===
