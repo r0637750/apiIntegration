@@ -168,7 +168,7 @@ public class Crypto {
     // API  ARTHUR -----------------------------------------------------------------------------------------------------
     @PostMapping("/user/add")
     public void addUser(@RequestBody Object user) {
-        String url = coinsApiArthur + "addCoin";
+        String url = coinsApiArthur + "add";
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(url, user, String.class);
     }
@@ -181,10 +181,11 @@ public class Crypto {
     }
 
     @GetMapping("/user/findByName/{name}")
-    public void findUserByName(@PathVariable String name, @RequestBody Object user) {
-        String url = coinsApiArthur + "update/" + name;
+    public String findUserByName(@PathVariable String name, @RequestBody Object user) {
+        String url = coinsApiArthur + "findByName/" + name;
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(url, user, String.class);
+        return restTemplate.getForObject(url, String.class);
+
     }
 
     @DeleteMapping("/user/delete/{id}")
